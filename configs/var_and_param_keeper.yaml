@@ -1,0 +1,306 @@
+# NOTE (VALUES-ONLY YAML)
+# - This file must contain ONLY values consumed by code.
+# - NO string values anywhere (no quoted numbers, no words like "wide").
+# - Allowed value types: int/float, null, and numeric lists (e.g., x_ini: [17.5, 6.7, 2.2, 0]).
+# - Put labels/descriptions in docs/README, not in this YAML.
+# configs/var_and_param_keeper.yaml
+
+parameters:
+  num_x: 4         # Number of state components in one x vector.       | --
+  num_d: 4         # Number of disturbance components in one d vector. | --
+  num_u: 10        # Number of control components in one u vector.     | --
+
+  x_idx_T_in: 0         # Index of T_in in x.  | --
+  x_idx_H_in: 1         # Index of H_in in x.  | --
+  x_idx_C_in: 2         # Index of C_in in x.  | --
+  x_idx_L: 3            # Index of L in x.     | --
+
+  d_idx_T_out: 0         # Index of T_out in d. | --
+  d_idx_H_out: 1         # Index of H_out in d. | --
+  d_idx_C_out: 2         # Index of C_out in d. | --
+  d_idx_R_out: 3         # Index of R_out in d. | --
+
+  u_idx_heat: 0        # Index of U_heat in u. | --
+  u_idx_fan: 1         # Index of U_fan in u.  | --
+  u_idx_nat: 2         # Index of U_nat in u.  | --
+  u_idx_ac: 3          # Index of U_ac in u.   | --
+  u_idx_dos: 4         # Index of U_dos in u.  | --
+  u_idx_LED: 5         # Index of U_LED in u.  | --
+  u_idx_hum: 6         # Index of U_hum in u.  | --
+  u_idx_deh: 7         # Index of U_deh in u.  | --
+  u_idx_shad: 8        # Index of U_shad in u. | --
+  u_idx_warm: 9        # Index of U_warm in u. | --
+
+  A_floor:        421       # Floor area. | m^2
+  A_roof:         472       # Roof area. | m^2
+  A_wall:         628       # Side-wall area. | m^2
+
+  c_vh:           1230      # Air volumetric heat capacity. | J/(m^3·°C)
+  C_hat_in:       0.42      # CO2 half-saturation constant. | g/m^3
+
+  D_bar_dos:      1.50      # Maximum CO2 dosing rate. | g/s
+  D_bar_ass:      2.2e-3    # Maximum CO2 assimilation flux. | g/(m^2·s)
+
+  F_bar_hum:      50        # Maximum injection rate of mist water. | g/s
+  F_bar_deh:      75        # Maximum moisture removal rate. | g/s Quest 746 480V High Capacity Dehumidifier Series * 10
+
+  H_tilde:        5.5638    # Empirical coefficient. | g/m^3
+
+  I:              3.0       # Leaf area index. | m^2/m^2
+
+  rho:            3.0e-3    # Radiation response coefficient. | m^2/W
+  P_bar_LED:      4.375e+4  # Maximum electrical power of LEDs. | W
+
+  q_evap:         2430      # Latent heat of evaporation. | J/g
+  q_deh:          3000      # Effective heat-gain per unit moisture removed. | J/g
+  Q_bar_heat:     5.00e+5   # Maximum power from heaters. | W
+  Q_bar_ac:       2.30e+5   # Maximum heat-removal from air conditioner. | W
+
+  r_b:            200       # Boundary layer resistance. | s/m
+  r_bar_s:        570       # Maximum additional resistance. | s/m
+  r_under_s:      82        # Minimal stomatal resistance. | s/m
+
+  delta_t:        300       # Time interval. | s
+
+  tau:            0.4       # Crop-specific coefficient. | m^2/W
+  T_sr:           24.5      # Reference temperature. | °C
+
+  upsilon_roof:   6.6       # Heat-transfer coefficient of roofs. | W/(m^2·°C)
+  upsilon_wall:   6.3       # Heat-transfer coefficient of side walls. | W/(m^2·°C)
+  nu_surf:        1.8e-3    # Condensation surface coefficient. | m/(°C^(1/3)·s)
+
+  V_gh:           3.351e+3  # Indoor volume. | m^3
+  V_bar_fan:      48        # Maximum mechanical ventilation rate. | m^3/s
+  V_bar_nat:      5         # Maximum natural ventilation rate. | m^3/s
+
+  omega_T:        20         # Temperature buffering coefficient. | -
+  omega_H:        3         # Humidity buffering coefficient. | -
+  omega_C:        1         # CO2 buffering coefficient. | -
+
+  chi:            2.5       # Latent-to-sensible ratio (sat air). | -
+
+  phi_solar:      2         # Solar radiation-to-PPFD coefficient. | umol/(W·s)
+  phi_LED:        7.5e-3    # LED power-to-PPFD coefficient. | umol/(m^2·s·W)
+
+  lambda_leak:    1         # Air leakage rate. | h^-1
+
+  zeta:           0.2522    # Empirical coefficient. | g/(m^3·°C)
+  sigma:          0.001     # Smoothing coefficient. | °C
+  num_hops:       30        # Number of RK4 sub-steps used inside one Δt step. | -
+
+  delta_tran:     0.0518    # Temperature sensitivity coefficient. | °C^-1
+  delta_sat:      0.0572    # Temperature sensitivity coefficient. | °C^-1
+  delta_vc:       0.0485    # Temperature sensitivity coefficient. | °C^-1
+  delta_sr:       0.023     # Temperature sensitivity coefficient. | °C^-2
+
+  eta_LED_r:      0.53      # Fraction of LED electrical power emitted as radiation (light). | -
+  eta_evap:       0.85      # Water evaporation fraction. | -
+  eta_cover:      0.50      # Cover shortwave transmissivity. | -
+  eta_tran:       0.7584    # Empirical coefficient. | -
+  eta_shad:       0.35      # Radiation attenuation of shading screen. | -
+  eta_warm:       0.50      # Heat insulation of warm-keeping screen. | -
+
+  S_fan:          93.4      # Specific fan power. | W/(m^3/s)
+
+  T_in_star_day:    24      # Reference of T_in (day).   | °C
+  T_in_upper_day:   27      # Upper bound of T_in (day). | °C
+  T_in_lower_day:   21      # Lower bound of T_in (day). | °C
+
+  T_in_star_night:  18.5    # Reference of T_in (night).   | °C
+  T_in_upper_night: 20      # Upper bound of T_in (night). | °C
+  T_in_lower_night: 17      # Lower bound of T_in (night). | °C
+  # Transition bounds are linear ramps:
+  # - transition_1: night -> day (kappa_transition_start_1 .. kappa_transition_end_1)
+  # - transition_2: day -> night (kappa_transition_start_2 .. kappa_transition_end_2)
+  T_in_upper_transition_start_1: 20  # Start upper bound of T_in (night -> day transition). | °C
+  T_in_upper_transition_end_1:   27  # End upper bound of T_in (night -> day transition).   | °C
+  T_in_upper_transition_start_2: 27  # Start upper bound of T_in (day -> night transition). | °C
+  T_in_upper_transition_end_2:   20  # End upper bound of T_in (day -> night transition).   | °C
+  T_in_lower_transition_start_1: 17  # Start lower bound of T_in (night -> day transition). | °C
+  T_in_lower_transition_end_1:   21  # End lower bound of T_in (night -> day transition).   | °C
+  T_in_lower_transition_start_2: 21  # Start lower bound of T_in (day -> night transition). | °C
+  T_in_lower_transition_end_2:   17  # End lower bound of T_in (day -> night transition).   | °C
+
+  H_in_star_day:    13.6    # Reference of H_in (day).   ≈ VPD 0.85 kPa at 27°C | g/m^3
+  H_in_upper_day:   15.6    # Upper bound of H_in (day). ≈ VPD 0.53 kPa at 27°C | g/m^3
+  H_in_lower_day:   10.3    # Lower bound of H_in (day). ≈ VPD 1.30 kPa at 27°C | g/m^3
+
+  H_in_star_night:  10.5    # Reference of H_in (night).   ≈ VPD 0.70 kPa at 19°C | g/m^3
+  H_in_upper_night: 12.4    # Upper bound of H_in (night). ≈ VPD 0.53 kPa at 19°C | g/m^3
+  H_in_lower_night:  6.7    # Lower bound of H_in (night). ≈ VPD 1.30 kPa at 19°C | g/m^3
+
+  # Transition bounds are linear ramps:
+  # - transition_1: night -> day (kappa_transition_start_1 .. kappa_transition_end_1)
+  # - transition_2: day -> night (kappa_transition_start_2 .. kappa_transition_end_2)
+  H_in_upper_transition_start_1: 12.4  # Start upper bound of H_in (night -> day transition). | g/m^3
+  H_in_upper_transition_end_1:   15.6  # End upper bound of H_in (night -> day transition).   | g/m^3
+
+  H_in_upper_transition_start_2: 15.6  # Start upper bound of H_in (day -> night transition). | g/m^3
+  H_in_upper_transition_end_2:   12.4  # End upper bound of H_in (day -> night transition).   | g/m^3
+
+  H_in_lower_transition_start_1: 6.7   # Start lower bound of H_in (night -> day transition). | g/m^3
+  H_in_lower_transition_end_1:  10.3   # End lower bound of H_in (night -> day transition).   | g/m^3
+
+  H_in_lower_transition_start_2: 10.3   # Start lower bound of H_in (day -> night transition). | g/m^3
+  H_in_lower_transition_end_2:    6.7   # End lower bound of H_in (day -> night transition).   | g/m^3
+
+  C_in_star_day:    2.19    # Reference of C_in (day).   | g/m^3
+  C_in_upper_day:   2.73    # Upper bound of C_in (day). | g/m^3
+  C_in_lower_day:   1.64    # Lower bound of C_in (day). | g/m^3
+
+  C_in_star_night:  1.62    # Reference of C_in (day). | g/m^3
+  C_in_upper_night: 2.73    # Upper bound of C_in (night). | g/m^3
+  C_in_lower_night: 0.50    # Lower bound of C_in (night). | g/m^3
+  C_in_upper_transition_start_1: 2.73  # Start upper bound of C_in (night -> day transition). | g/m^3
+  C_in_upper_transition_end_1:   2.73  # End upper bound of C_in (night -> day transition).   | g/m^3
+  C_in_upper_transition_start_2: 2.73  # Start upper bound of C_in (day -> night transition). | g/m^3
+  C_in_upper_transition_end_2:   2.73  # End upper bound of C_in (day -> night transition).   | g/m^3
+  C_in_lower_transition_start_1: 0.50  # Start lower bound of C_in (night -> day transition). | g/m^3
+  C_in_lower_transition_end_1:   1.64  # End lower bound of C_in (night -> day transition).   | g/m^3
+  C_in_lower_transition_start_2: 1.64  # Start lower bound of C_in (day -> night transition). | g/m^3
+  C_in_lower_transition_end_2:   0.50  # End lower bound of C_in (day -> night transition).   | g/m^3
+
+  L_star_k_max:   22        # Reference of L_k (max).              | mol/m^2
+  L_star_k_start: 72        # Reference of L_k (ramp start kappa). | --
+  L_star_k_end:   264       # Reference of L_k (ramp end kappa).   | --
+  L_star_k_slope: 0.115     # Reference of L_k (22/192).           | mol/m^2
+
+  # Time-of-day split for kappa_k (5-minute steps, 0..287):
+  # Daytime is 06:00-22:00 (72 <= kappa_k < 264).
+  # Transition is 05:00-06:00 and 22:00-23:00 (60 <= kappa_k < 72 or 264 <= kappa_k < 276).
+  # Nighttime is 23:00-05:00 (0 <= kappa_k < 60 or 276 <= kappa_k < 288).
+  transition_length_min: 60         # Controllable transition length (ramp-up/down time). | min
+  transition_length_step_min: 5     # Resolution of transition-length control (delta_t = 300 s). | min
+  transition_length_steps: 12       # Transition length in kappa steps (transition_length_min/5). | --
+  
+  kappa_transition_start_1: 60      # Night -> day transition starts at 05:00.            | --
+  kappa_transition_end_1: 72        # Night -> day transition ends at 06:00 (exclusive).  | --
+
+  kappa_transition_start_2: 264     # Day -> night transition starts at 22:00.            | --
+  kappa_transition_end_2: 276       # Day -> night transition ends at 23:00 (exclusive).  | --
+
+
+  kappa_day_start:   72             # Day starts at 06:00.                                | --
+  kappa_day_end:     264            # Day ends at 22:00 (exclusive).                      | --
+  kappa_night_start_1: 0            # First night segment starts at 00:00.                | --
+  kappa_night_end_1: 60             # First night segment ends at 05:00 (exclusive).      | --
+  kappa_night_start_2: 276          # Second night segment starts at 23:00.               | --
+  kappa_night_end_2: 288            # Second night segment ends at 24:00 (exclusive).     | --
+  kappa_day_night_total_steps: 288  # Steps per day at delta_t=300s.                      | --
+
+  alpha_heat:     0.200    # Price of heating.               | $/kWh
+  alpha_fan:      0.850    # Price of ventilation.           | $/kWh
+  alpha_ac:       0.990    # Price of using air conditioner. | $/kWh
+  alpha_dos:      1.5e-4   # Price of CO2 dosing.            | $/g
+  alpha_LED:      0.850    # Price of LED lighting.          | $/kWh
+  alpha_hum:      2.0e-5   # Price of humidifying.           | $/g
+  alpha_deh:      4.0e-5   # Price of dehumidifying.         | $/g
+
+  lambda_T_pos:  4.0      # Penalty coefficient. | $/°C²
+  lambda_T_neg:  4.0      # Penalty coefficient. | $/°C²
+  lambda_H_pos:  1.5      # Penalty coefficient. | $/(g/m^3)²
+  lambda_H_neg:  1.0      # Penalty coefficient. | $/(g/m^3)²
+  lambda_C_pos:  0.001    # Penalty coefficient. | $/(g/m^3)²
+  lambda_C_neg:  90       # Penalty coefficient. | $/(g/m^3)²
+  lambda_L:      3.0      # Penalty coefficient. | $/(mol/m^2)²
+
+  gamma: 0.99 # Discount factor. | --
+
+variables:
+  C_in:           null      # Indoor CO2 absolute concentration. | g/m^3
+  C_out:          null      # Outdoor CO2 absolute concentration. | g/m^3
+
+  D_dos:          null      # CO2 dosing rate. | g/s
+  D_vent:         null      # CO2 changing rate due to ventilation. | g/s
+  D_ass:          null      # CO2 assimilation rate. | g/s
+
+  F_hum:          null      # Humidifying rate.                               | g/s
+  F_deh:          null      # Dehumidifying rate.                             | g/s
+  F_vent:         null      # Humidity changing rate due to venting.          | g/s
+  F_tran:         null      # Humidity changing rate due to transpiration.    | g/s
+  F_vc:           null      # Humidity changing rate due to vapor condensing. | g/s
+
+  g_vc:           null      # Vapor condensing coefficient. | m/s
+  g_tran:         null      # Transpiration conductance.    | m/s
+
+  H_in:           null      # Indoor absolute humidity.                         | g/m^3
+  H_in_sat:       null      # Indoor saturation absolute humidity.              | g/m^3
+  H_out:          null      # Outdoor absolute humidity.                        | g/m^3
+  H_cano:         null      # Absolute humidity at canopy.                      | g/m^3
+
+  L:              null      # Daily light integral (resets to 0 at 00:00). | mol/m^2
+
+  Q_heat:         null      # Heat-gain power due to heaters. | W
+  Q_vent:         null      # Heat-exchange power due to ventilation. | W
+  Q_cool:         null      # Heat-loss power due to cooling systems. | W
+  Q_solar:        null      # Heat-gain power due to solar radiation. | W
+  Q_o_i:          null      # Heat-exchange power due to T_o_i. | W
+  Q_LED:          null      # Heat-gain power due to LEDs. | W
+  Q_tran:         null      # Heat-loss power due to transpiration. | W
+  Q_deh:          null      # Heat-gain power due to dehumidifying. | W
+
+  r_s:            null      # Canopy stomatal resistance. | s/m
+  R_roof_solar:   null      # Indoor solar radiation at roof. | W/m^2
+  R_roof_LED:     null      # LIndoor LED radiation at roof. | W/m^2
+  R_cano_glo:     null      # Global radiation at canopy. | W/m^2
+  R_out:          null      # Outdoor radiation. | W/m^2
+  RH_out:         null      # Outdoor relative humidity. | %
+
+  t:              null      # Time. | s
+  T_out:          null      # Outdoor temperature.                            | °C
+  T_in:           null      # Indoor temperature.                             | °C
+  T_cover:        null      # Covering temperature.                           | °C
+  T_o_i:          null      # Outdoor-indoor temperature difference.          | °C
+
+  U_heat:         null      # Actuation of heater power.                      | -
+  U_fan:          null      # Actuation of ventilation fan speed.             | -
+  U_nat:          null      # Actuation of natural ventilation opening ratio. | -
+  U_ac:           null      # Actuation of air conditioner.                   | -
+  U_dos:          null      # Actuation of CO2 dosing rate.                   | -
+  U_LED:          null      # Actuation of LED electric power.                | -
+  U_hum:          null      # Actuation of humidification rate.               | -
+  U_deh:          null      # Actuation of dehumidification rate.             | -
+  U_shad:         null      # Actuation of shading screen closure.            | -
+  U_warm:         null      # Actuation of warm-keeping screen closure.       | -
+
+
+  V_vent:         null      # Total ventilation. | m^3/s
+
+  X_cano:         null      # PPFD at canopy. | umol/(m^2·s)
+
+  x_ini: [ 17.5, 9.5, 1.62, 0 ]  # Default initial state [T_in, H_in, C_in, L]. | [°C, g/m^3, g/m^3, mol/m^2]
+
+  E_heat:         null      # Cost of heating in step k.         | $
+  E_fan:          null      # Cost of fan electricity in step k. | $
+  E_LED:          null      # Cost of LED electricity in step k. | $
+  E_ac:           null      # Cost of air conditioner in step k. | $
+  E_hum:          null      # Cost of humidifying in step k.     | $
+  E_deh:          null      # Cost of dehumidifying in step k.   | $
+  E_dos:          null      # Cost of CO2 dosing in step k.      | $
+
+  k:              null      # Step index. | --
+  kappa_k:        null      # Time-of-day step index (0..287). | --
+  K:              null      # Number of steps. | --
+
+  S_T_pos:        null      # Slacking variable for T+. | °C
+  S_T_neg:        null      # Slacking variable for T-. | °C
+  S_H_pos:        null      # Slacking variable for H+. | g/m^3
+  S_H_neg:        null      # Slacking variable for H-. | g/m^3
+  S_C_pos:        null      # Slacking variable for C+. | g/m^3
+  S_C_neg:        null      # Slacking variable for C-. | g/m^3
+  S_L:            null      # Shortage of daily light integral. | mol/m^2
+
+  T_in_upper_day_ro:   null      # Rosbut upper bound of T_in (day). | °C
+  T_in_lower_day_ro:   null      # Rosbut lower bound of T_in (day). | °C
+
+  T_in_upper_night_ro: null      # Rosbut upper bound of T_in (night). | °C
+  T_in_lower_night_ro: null      # Rosbut lower bound of T_in (night). | °C
+
+  H_in_upper_ro:      null       # Rosbut upper bound of H_in. | g/m^3
+  H_in_lower_ro:      null       # Rosbut lower bound of H_in. | g/m^3
+
+  C_in_upper_day_ro:   null      # Rosbut upper bound of C_in (day). | g/m^3
+  C_in_lower_day_ro:   null      # Rosbut lower bound of C_in (day). | g/m^3
+
+  C_in_upper_night_ro: null      # Rosbut upper bound of C_in (night). | g/m^3
+  C_in_lower_night_ro: null      # Rosbut lower bound of C_in (night). | g/m^3
